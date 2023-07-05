@@ -1,0 +1,10 @@
+.footer {
+    display: flex;
+    min-height: 200px;
+    text-align: center;
+    
+}
+.contacto {
+    font-size: 1.5rem;
+    font-family: "Verdana " sans-serif ;
+}

@@ -1,0 +1,41 @@
+.logo {
+    
+    margin: 0 auto;
+    width: 60px;
+    border-radius: 50%;
+    justify-content: center;
+}
+.custom-navbar {
+   
+    padding: 10px; /* Ajusta el espacio interno de la barra de navegación según tus preferencias */
+  }
+  
+.custom-navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.custom-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
+}
+  
+.custom-navbar .logo {
+    margin-top: 50px;
+    margin-right: 10px; /* Ajusta el margen derecho del logo según tus preferencias */
+}
+  
+.custom-navbar h1 {
+    margin: 0;
+    font-size: 2rem; /* Ajusta el tamaño de fuente del nombre según tus preferencias */
+}
+  
+.menu-dropdown {
+    margin-left: auto;
+}
+  
+  
+  
+  
+  

@@ -1,0 +1,32 @@
+.main {
+    display: grid;
+    margin: 0;
+    height: 1000px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(1, 1fr);
+    grid-template-areas: 'main'  'main1'
+}
+.titulo{
+    font-size: 30px;
+    margin: 15%;
+    font-family:"Verdana" sans-serif;
+    text-align: center;   
+    color: #0c0c0c;
+    text-transform: uppercase;
+}
+.main1 {
+    grid-area: "main";
+    grid-row: 1 / span 2;
+}    
+.main2 {
+    grid-area: 'main1';
+    grid-row: 1 / span 2;
+}
+.enunciado{
+    font-size: 20px;
+    margin: 40% 25% 25% 25%;
+    font-family: "Verdana" sans-serif;
+    
+    text-align: center;   
+    color: rgb(245, 252, 252);
+}

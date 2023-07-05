@@ -1,24 +1,35 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from "react";
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import listaDeElementos from "./data.json";
 
+import Cards from "./components/Cards";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import LandingPage from "./components/LandingPage";
+
+  
 function App() {
+  const [tarjetas, setTarjetas] = useState([]);
+
+  useEffect(() => {
+    const tarjetasGuardadas = localStorage.getItem("tarjetas");
+    if (tarjetasGuardadas) {
+      setTarjetas(JSON.parse(tarjetasGuardadas));
+    }
+  }, []);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <Header/>
+        <LandingPage/>
+        <Cards
+          listaDeElementos= {tarjetas}
+        />
+        <Footer/>
+      </div>
+    </>
   );
 }
 
