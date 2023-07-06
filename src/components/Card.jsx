@@ -6,7 +6,7 @@ import { v4 as uuid } from 'uuid';
 import data from "../data.json";
 
 
-const Card = ( ) => {
+const Card = () => {
   let tarjetasData = data;
   let tarjetasGuardadasLocalStorage = JSON.parse(localStorage.getItem("tarjetas"));
   if (!tarjetasGuardadasLocalStorage) {
@@ -14,6 +14,7 @@ const Card = ( ) => {
     
     tarjetasGuardadasLocalStorage=[...tarjetasCombinadas]
   };
+  
   const [tarjeta, editarTarjeta] = useState({
         title: "",
         imageSource: "",
@@ -32,7 +33,7 @@ const Card = ( ) => {
     useEffect(() => {
       // Guardar las tarjetas actualizadas en el almacenamiento local cada vez que cambien
       
-      
+      localStorage.removeItem('3');
       if(tarjetasGuardadasLocalStorage){
        
         localStorage.setItem("tarjetas", JSON.stringify(tarjetasGuardadas));
@@ -78,14 +79,14 @@ const Card = ( ) => {
     // creamos un Hook para guardar la url del gatito
     const [urlGatito, editar]= useState("");
    
-  
+    
     // Funcion para consultar API gatitos
 
-/*     Usamos la función de actualización del estado anterior (prevState)
+   /* Usamos la función de actualización del estado anterior (prevState)
        para asegurarnos de que los otros campos (como "title" y "text") no
        se vean afectados y solo actualizamos el campo "imageSource" con la 
        URL de la imagen.
- */    
+   */    
     const consultaAPIGatito = async() => {
         try{
         const api = await fetch("https://api.thecatapi.com/v1/images/search")
