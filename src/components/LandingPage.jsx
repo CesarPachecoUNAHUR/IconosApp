@@ -1,27 +1,18 @@
 import React from 'react'
 import '../misEstilos/landingPage.css'
-import Card from './Card';
-
 
 const LandingPage = () => {
    
     return (
         <div className='container'>
-            <div className='main align-items-center'>
-                <section className='main1'>
-                  <Card/>
-                </section>
-                <section class="main2">
-                <h3 class="titulo">
-                    <strong>Iconos:</strong> <br/>
-                    Las mascotas que queremos llevar,
-                    compartir y amarlas en donde estemos, 
-                    disfutando sus mejores expresiones.
+            <section>
+                <h3 className="titulo">
+                    <strong> Las imagenes que necesitas,
+                    esta a la alcandce de un click
+                    </strong>                    
                 </h3>    
-                </section>
-                
-            </div>
-       
+            </section>
+                 
         </div>
      );
 }

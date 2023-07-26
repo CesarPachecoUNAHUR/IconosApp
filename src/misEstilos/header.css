@@ -1,8 +1,9 @@
 .logo {
-    
-    margin: 0 auto;
-    width: 60px;
-    border-radius: 50%;
+    margin: 0.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    font-family: sans-serif;
     justify-content: center;
 }
 .custom-navbar {
