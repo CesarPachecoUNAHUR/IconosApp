@@ -5,26 +5,22 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    background-color: #f0f0f0;
+    background-color: #faf9f9;
     padding: 20px;
-  }
-  
-  .icon-container {
+}
+.icon-container {
     display: flex;
     align-items: center;
-  }
-  
-  .icon-link {
+}
+.icon-link {
     margin-right: 10px;
-  }
-  
-  .icon-link:last-child {
+}
+.icon-link:last-child {
     margin-right: 0;
-  }
-  
-  .contact-text {
+}
+.contact-text {
     font-size: 18px;
     font-weight: bold;
     margin-right: 10px;
-  }
+}
   

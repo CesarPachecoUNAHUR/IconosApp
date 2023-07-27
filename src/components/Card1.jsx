@@ -8,27 +8,34 @@ const clientId = "ADuaX1kAFrPdhQOanx5y3mZIRQA8hzVeIZRytvFJ4Ws";
 const Card = () => {
   const [query, setQuery] = useState('');
   const [searchImages, setSearchImages] = useState([]);
-  const [favorites, setFavorites] = useState(() => {
-    const savedFavorites = localStorage.getItem('favorites');
-    return savedFavorites ? JSON.parse(savedFavorites) : [];
-  });
-  // Función para guardar las imágenes favoritas en el localStorage
-  const saveFavoritesToLocalStorage = (favorites) => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  };
-   // Actualizar el localStorage cada vez que cambian las imágenes favoritas
-   useEffect(() => {
-    saveFavoritesToLocalStorage(favorites);
-  }, [favorites]);
 
-  // Restaurar las imágenes favoritas al cargar el componente
+
+//Iniciamos nuestro local storage
+  let savedFavorites = JSON.parse(localStorage.getItem('favorites'));
+  if(!savedFavorites){
+    savedFavorites= []
+  }
+  
+  //Generar un hook de estado vacío con las diferentes imagenes favoritas.
+  const [favorites, setFavorites] = useState(savedFavorites);
+
+  // Estado para mantener las imágenes favoritas debajo de las imágenes buscadas
+  const [favoriteImages, setFavoriteImages] = useState([]);
+
+  // Hook useEffect: Sirve para ejecutar alguna funcionalidad cuando hay algun cambio 
+  // en alguna variablle/hook/situacion
   useEffect(() => {
-    const savedFavorites = localStorage.getItem('favorites');
-    if (savedFavorites) {
-      setFavorites(JSON.parse(savedFavorites));
+    if (favorites) {
+      localStorage.setItem('favorites', JSON.stringify(favorites))
+    }else {
+     localStorage.setItem('favorites', JSON.stringify([]))
     }
-  }, []);
-
+  }, [savedFavorites]); 
+ 
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favoriteImages));
+  }, [favoriteImages]);
+  
   // Estado para mantener el número de página actual
   const [page, setPage] = useState(1);
   // Número de imágenes por página
@@ -44,7 +51,6 @@ const Card = () => {
       if (query) {
         url += `&query=${query}`;
       }
-
       // Realizar la llamada a la API
       fetch(url)
         .then(response => response.json())
@@ -81,14 +87,19 @@ const Card = () => {
     setQuery('');
     setMultipleOfTen(10);
   };
-
+ 
   const toggleFavorite = (id) => {
-    const isFavorite = favorites.includes(id);
-    const updatedFavorites = isFavorite
-      ? favorites.filter(favoriteId => favoriteId !== id)
-      : [...favorites, id];
-    setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    const isFavorite = favoriteImages.some(image => image.id === id);
+    if (isFavorite) {
+      const updatedFavorites = favoriteImages.filter(image => image.id !== id);
+      setFavoriteImages(updatedFavorites);
+    } else {
+      // Buscar la imagen en las imágenes buscadas y agregarla a las favoritas
+      const selectedImage = searchImages.find(image => image.id === id);
+      if (selectedImage) {
+        setFavoriteImages([...favoriteImages, selectedImage]);
+      }
+    }
   };
 
   return (
@@ -112,11 +123,30 @@ const Card = () => {
           
           <div className='card-columns mt-4'>
             {searchImages.length > 0 ?
-              <ImagenGaleria images={searchImages.slice(0, multipleOfTen)} favorites={favorites} toggleFavorite={toggleFavorite} />
+              <ImagenGaleria 
+                images={searchImages.slice(0, multipleOfTen)} 
+                favorites={""} 
+                toggleFavorite={toggleFavorite} />
               :
               <p>No se encontraron imágenes.</p>
             }
           </div>
+          {/* Agregar una nueva sección para mostrar las imágenes favoritas */}
+        <div className='row-wrapper'>
+          <h2>Imágenes Favoritas</h2>
+          <div className='card-columns mt-4'>
+            {favorites.length > 0 ? (
+              <ImagenGaleria
+                images={favoriteImages}
+                favorites={favorites.map(image => image.id)}
+                toggleFavorite={toggleFavorite}
+              />
+            ) : (
+              <p>No tienes imágenes favoritas seleccionadas.</p>
+            )}
+          </div>
+        </div>
+
           
         </div>
       </div>

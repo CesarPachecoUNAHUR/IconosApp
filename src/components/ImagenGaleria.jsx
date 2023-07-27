@@ -27,10 +27,10 @@ const ImagenGaleria = ({ images, favorites, toggleFavorite }) => {
               className={`img-thumbnail ${isHovered === image.id ? "enlarged" : ""}`}
             />
             <button
-              onClick={() => toggleFavorite(image)}
-              className={favorites.some(favorite => favorite.id === image.id) ? "btn btn-danger mt-2" : "btn btn-outline-primary mt-2"}
+              onClick={() => toggleFavorite(image.id)}
+              className={favorites? "btn btn-danger mt-2" : "btn btn-outline-primary mt-2"}
             >
-              {favorites.some(favorite => favorite.id === image.id) ? "Quitar favorito" : "Favorito"}
+              {favorites? "Quitar favorito" : "Favorito"}
             </button>
           </div>
         </div>
