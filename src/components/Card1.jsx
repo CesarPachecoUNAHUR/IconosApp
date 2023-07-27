@@ -9,29 +9,9 @@ const Card = () => {
   const [query, setQuery] = useState('');
   const [searchImages, setSearchImages] = useState([]);
 
-
-//Iniciamos nuestro local storage
-  let savedFavorites = JSON.parse(localStorage.getItem('favorites'));
-  if(!savedFavorites){
-    savedFavorites= []
-  }
-  
-  //Generar un hook de estado vacío con las diferentes imagenes favoritas.
-  const [favorites, setFavorites] = useState(savedFavorites);
-
   // Estado para mantener las imágenes favoritas debajo de las imágenes buscadas
   const [favoriteImages, setFavoriteImages] = useState([]);
 
-  // Hook useEffect: Sirve para ejecutar alguna funcionalidad cuando hay algun cambio 
-  // en alguna variablle/hook/situacion
-  useEffect(() => {
-    if (favorites) {
-      localStorage.setItem('favorites', JSON.stringify(favorites))
-    }else {
-     localStorage.setItem('favorites', JSON.stringify([]))
-    }
-  }, [savedFavorites]); 
- 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favoriteImages));
   }, [favoriteImages]);
@@ -135,10 +115,10 @@ const Card = () => {
         <div className='row-wrapper'>
           <h2>Imágenes Favoritas</h2>
           <div className='card-columns mt-4'>
-            {favorites.length > 0 ? (
+            {favoriteImages.length > 0 ? (
               <ImagenGaleria
                 images={favoriteImages}
-                favorites={favorites.map(image => image.id)}
+                favorites={favoriteImages.map(image => image.id)}
                 toggleFavorite={toggleFavorite}
               />
             ) : (
