@@ -1,61 +1,86 @@
-
 .row {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
-  
+
 .col {
-    flex-basis: 25%;
-    padding: 5px;
+  flex-basis: 25%;
+  padding: 5px;
 }
-  
+
 /* Ajusta el tamaño de las imágenes según tus necesidades */
 .img-thumbnail {
-    width: 100%;
-    height: 200px; /* Ajusta el alto de las imágenes según tus necesidades */
-    object-fit: cover; /* Para asegurarse de que todas las imágenes mantengan su relación de aspecto */
-    border-radius: 5px;
+  width: 100%;
+  height: 200px; /* Ajusta el alto de las imágenes según tus necesidades */
+  object-fit: cover; /* Para asegurarse de que todas las imágenes mantengan su relación de aspecto */
+  border-radius: 5px;
 }
 .enlarged {
-    transform: scale(1.2); /* ajusta el valor para controlar el grado de agrandamiento */
-    transition: transform 0.2s ease-in-out; /* Añade una transición suave al agrandar */
-}  
-.search-form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
+  transform: scale(
+    1.2
+  ); /* ajusta el valor para controlar el grado de agrandamiento */
+  transition: transform 0.2s ease-in-out; /* Añade una transición suave al agrandar */
 }
-  
+.search-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .search-container,
 .image-counter-container {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
 }
-  
+
 .search-container label,
 .image-counter-container label {
-    font-weight: bold;
-    margin-right: 10px;
+  font-weight: bold;
+  margin-right: 10px;
 }
-  
+
 .search-container input,
 .image-counter-container input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
 }
 /* Aplicar un ancho personalizado al input del contador */
 .image-counter-container input {
-    width: 80px; 
+  width: 80px;
 }
+
 .search-button {
-    padding: 8px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 8px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+  .search-button,
+  .favorite-button {
+    padding: 6px 12px; /* Reducir el padding en pantallas más pequeñas */
+    font-size: 14px; /* Ajustar el tamaño de fuente en pantallas más pequeñas */
+    width: 100%; /* Asegurar que los botones ocupen todo el ancho disponible */
+    margin-bottom: 10px; /* Agregar un margen inferior para separar los botones */
+  }
+
+  /* Estilos adicionales para el contenedor de los botones */
+  .search-form {
+    flex-direction: column; /* Mostrar los elementos en columna en pantallas más pequeñas */
+    align-items: stretch; /* Alinear los elementos al estirarlos para ocupar todo el ancho */
+  }
+
+  /* Estilos adicionales para el contenedor del contador de imágenes */
+  .image-counter-container {
+    margin-top: 10px; /* Agregar un margen superior para separar el contador de los botones */
+  }
 }
