@@ -10,17 +10,14 @@ const Card = () => {
   const [searchImages, setSearchImages] = useState([]);
 
   // Estado para mantener las imágenes favoritas debajo de las imágenes buscadas
-  
-  
- 
+     
   let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
   if (!storedFavorites) {
     storedFavorites=[]
       console.log('Imágenes favoritas cargadas desde el Local Storage:', JSON.parse(storedFavorites));
   }
   const [favoriteImages, setFavoriteImages] = useState(storedFavorites);
- 
-  
+   
   useEffect(() => {
     if(storedFavorites){
     localStorage.setItem('favorites', JSON.stringify(favoriteImages));
