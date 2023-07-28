@@ -10,17 +10,24 @@ const Card = () => {
   const [searchImages, setSearchImages] = useState([]);
 
   // Estado para mantener las imágenes favoritas debajo de las imágenes buscadas
-  const [favoriteImages, setFavoriteImages] = useState([]);
+  
+  
+ 
+  let storedFavorites = JSON.parse(localStorage.getItem('favorites'));
+  if (!storedFavorites) {
+    storedFavorites=[]
+      console.log('Imágenes favoritas cargadas desde el Local Storage:', JSON.parse(storedFavorites));
+  }
+  const [favoriteImages, setFavoriteImages] = useState(storedFavorites);
+ 
+  
   useEffect(() => {
-    // Obtener las imágenes favoritas almacenadas en el Local Storage
-    const storedFavorites = localStorage.getItem('favorites');
-    if (storedFavorites) {
-      setFavoriteImages(JSON.parse(storedFavorites));
-    }
-  }, []);
-  useEffect(() => {
+    if(storedFavorites){
     localStorage.setItem('favorites', JSON.stringify(favoriteImages));
-  }, [favoriteImages]);
+    }else {
+      localStorage.setItem('favorites', JSON.stringify([]))
+     }
+  }, [storedFavorites]);
   
   // Estado para mantener el número de página actual
   const [page, setPage] = useState(1);
@@ -75,17 +82,19 @@ const Card = () => {
   };
  
   const toggleFavorite = (id) => {
-    const isFavorite = favoriteImages.some(image => image.id === id);
-    if (isFavorite) {
-      const updatedFavorites = favoriteImages.filter(image => image.id !== id);
-      setFavoriteImages(updatedFavorites);
-    } else {
-      // Buscar la imagen en las imágenes buscadas y agregarla a las favoritas
-      const selectedImage = searchImages.find(image => image.id === id);
-      if (selectedImage) {
-        setFavoriteImages([...favoriteImages, selectedImage]);
+    setFavoriteImages(prevFavorites => {
+      const isFavorite = prevFavorites.some(image => image.id === id);
+      if (isFavorite) {
+        return prevFavorites.filter(image => image.id !== id);
+      } else {
+        // Buscar la imagen en las imágenes buscadas y agregarla a las favoritas
+        const selectedImage = searchImages.find(image => image.id === id);
+        if (selectedImage) {
+          return [...prevFavorites, selectedImage];
+        }
       }
-    }
+      return prevFavorites; // Si no hay cambios, devolver el estado actual sin modificar
+    });
   };
 
   return (
