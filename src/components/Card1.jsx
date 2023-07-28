@@ -23,8 +23,8 @@ const Card = () => {
     localStorage.setItem('favorites', JSON.stringify(favoriteImages));
     }else {
       localStorage.setItem('favorites', JSON.stringify([]))
-     }
-  }, [storedFavorites]);
+    }
+  }, [storedFavorites, favoriteImages] );
   
   // Estado para mantener el número de página actual
   const [page, setPage] = useState(1);
